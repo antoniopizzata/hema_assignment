@@ -1,0 +1,37 @@
+{
+    "settings": {
+        "name": "ETL process",
+        "email_notifications": {
+			"on_failure": ["email@email.com"]
+		},
+        "webhook_notifications": {},
+        "timeout_seconds": 0,
+        "max_concurrent_runs": 1,
+        "tasks": [
+            {
+                "task_key": "job_etl_process",
+                "run_if": "ALL_SUCCESS",
+                "python_wheel_task": {
+					"package_name": "etl_process",
+					"entry_point": "etl_process.start",
+					"parameters": []
+				},
+                "existing_cluster_id": "<cluster id for pipeline>",
+                "max_retries": 0,
+                "min_retry_interval_millis": 60000,
+                "retry_on_timeout": false,
+                "timeout_seconds": 0,
+                "email_notifications": {
+					"on_failure": ["email@email.com"]
+				},
+                "notification_settings": {
+                    "no_alert_for_skipped_runs": false,
+                    "no_alert_for_canceled_runs": false,
+                    "alert_on_last_attempt": false
+                }
+            }
+        ],
+        "git_source": {},
+        "format": "MULTI_TASK"
+    }
+}
